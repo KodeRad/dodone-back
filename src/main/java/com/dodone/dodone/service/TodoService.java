@@ -2,9 +2,16 @@ package com.dodone.dodone.service;
 
 import com.dodone.dodone.controller.errors.ExceptionNoSuchElement;
 import com.dodone.dodone.entity.Todo;
+import com.dodone.dodone.service.email.EmailService;
+import jakarta.mail.MessagingException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import com.dodone.dodone.repository.TodoRepository;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,7 +44,6 @@ public class TodoService {
     }
 
     public Todo update(Long id, Todo updatedTodo) {
-        // FIND THE OPTIONAL TODO
         Optional<Todo> optionalTodo = todoRepository.findById(id);
 
         if (optionalTodo.isPresent()) {
